@@ -6,7 +6,7 @@
   </div>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="{{ character.url }}">{{ character.data.name }}</a>
+      <a href="{{ character.url | url }}">{{ character.data.name }}</a>
     </h3>
     {% if character.data.name_en %}
       <p class="card-subtitle">{{ character.data.name_en }}</p>
