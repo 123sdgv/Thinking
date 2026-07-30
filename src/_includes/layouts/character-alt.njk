@@ -46,7 +46,7 @@ layout: layouts/base.njk
           <div class="rel-type">{{ rel.type }}</div>
           <div class="rel-content">
             {% if relChar %}
-              <a href="{{ relChar.url }}">{{ relChar.data.name }}</a>
+              <a href="{{ relChar.url | url }}">{{ relChar.data.name }}</a>
             {% else %}
               <span>{{ rel.character }}</span>
             {% endif %}
@@ -65,7 +65,7 @@ layout: layouts/base.njk
     <h2>参与的故事</h2>
     <ul>
       {% for story in charStories %}
-        <li><a href="{{ story.url }}">{{ story.data.title }}</a></li>
+        <li><a href="{{ story.url | url }}">{{ story.data.title }}</a></li>
       {% endfor %}
     </ul>
   </section>
