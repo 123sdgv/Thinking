@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} - OC Universe</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/characters/">Characters</a>
+      <a href="/stories/">Stories</a>
+    </nav>
+  </header>
+  
+  <main>
+    {{ content | safe }}
+  </main>
+  
+  <footer>
+    <p>© {{ now | date("Y") }} OC Universe</p>
+  </footer>
+</body>
+</html>
