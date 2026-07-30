@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}{{ character.data.title }} - OC Universe{% endblock %}
+
+{% block content %}
+<div class="character-page">
+  <header>
+    <h1>{{ character.data.title }}</h1>
+    <p class="character-subtitle">{{ character.data.subtitle }}</p>
+  </header>
+
+  <div class="character-content">
+    <img src="{{ character.data.image }}" alt="{{ character.data.title }}" class="character-portrait">
+    
+    <div class="character-info">
+      <h2>Basic Information</h2>
+      <dl>
+        <dt>Age</dt><dd>{{ character.data.age }}</dd>
+        <dt>Birthday</dt><dd>{{ character.data.birthday }}</dd>
+        <dt>Species</dt><dd>{{ character.data.species }}</dd>
+        <dt>Occupation</dt><dd>{{ character.data.occupation }}</dd>
+        <dt>Status</dt><dd>{{ character.data.status }}</dd>
+      </dl>
+    </div>
+
+    <div class="character-bio">
+      <h2>Background</h2>
+      {{ character.content | markdown | safe }}
+    </div>
+
+    <div class="character-relationships">
+      <h2>Relationships</h2>
+      <ul>
+        {% for rel in character.data.relationships %}
+        <li>
+          <a href="/characters/{{ rel.character | slug }}/">{{ rel.character }}</a>
+          <span>{{ rel.type }}</span>
+          <p>{{ rel.description }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="character-stories">
+      <h2>Story Appearances</h2>
+      <ul>
+        {% for story in character.data.stories %}
+        <li><a href="/stories/{{ story | slug }}/">{{ story }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
