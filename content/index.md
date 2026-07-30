@@ -17,43 +17,27 @@ permalink: "/"
 <div class="home-grid">
 
 <div class="home-card">
-
-### 👤 角色
-
-每一位 OC 都有独特的背景、经历和故事。
-
-[→ 查看所有角色](/characters/)
-
+  <h3>👤 角色</h3>
+  <p>每一位 OC 都有独特的背景、经历和故事。</p>
+  <p><a href="{{ '/characters/' | url }}">→ 查看所有角色</a></p>
 </div>
 
 <div class="home-card">
-
-### 📖 故事
-
-从短篇到长篇，正史到番外，交织成完整的叙事。
-
-[→ 查看所有故事](/stories/)
-
+  <h3>📖 故事</h3>
+  <p>从短篇到长篇，正史到番外，交织成完整的叙事。</p>
+  <p><a href="{{ '/stories/' | url }}">→ 查看所有故事</a></p>
 </div>
 
 <div class="home-card">
-
-### 🌍 世界观
-
-时间线、地点、事件——构成这个世界的骨架。
-
-[→ 查看世界观](/world/)
-
+  <h3>🌍 世界观</h3>
+  <p>时间线、地点、事件——构成这个世界的骨架。</p>
+  <p><a href="{{ '/world/' | url }}">→ 查看世界观</a></p>
 </div>
 
 <div class="home-card">
-
-### 🖼️ 画廊
-
-角色立绘、插画、概念图。
-
-[→ 查看图片](/images/)
-
+  <h3>🖼️ 画廊</h3>
+  <p>角色立绘、插画、概念图。</p>
+  <p><a href="{{ '/images/' | url }}">→ 查看图片</a></p>
 </div>
 
 </div>
