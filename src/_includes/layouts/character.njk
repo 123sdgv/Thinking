@@ -91,7 +91,7 @@ layout: layouts/base.njk
           <div class="rel-type">{{ rel.type }}</div>
           <div class="rel-content">
             {% if relChar %}
-              <a href="{{ relChar.url }}" class="rel-name">{{ relChar.data.name }}</a>
+              <a href="{{ relChar.url | url }}" class="rel-name">{{ relChar.data.name }}</a>
             {% else %}
               <span class="rel-name">{{ rel.character }}</span>
             {% endif %}
@@ -111,7 +111,7 @@ layout: layouts/base.njk
     <div class="story-list">
       {% for story in charStories %}
         <div class="story-entry">
-          <h3><a href="{{ story.url }}">{{ story.data.title }}</a></h3>
+          <h3><a href="{{ story.url | url }}">{{ story.data.title }}</a></h3>
           {% if story.data.status %}
             <span class="status-badge status-{{ story.data.status | lower }}">{{ story.data.status }}</span>
           {% endif %}
@@ -132,7 +132,7 @@ layout: layouts/base.njk
     <ul class="chapter-list">
       {% for chapter in charChapters %}
         <li>
-          <a href="{{ chapter.url }}">{{ chapter.data.title }}</a>
+          <a href="{{ chapter.url | url }}">{{ chapter.data.title }}</a>
           {% if chapter.data.date %}
             <span class="chapter-date">({{ chapter.data.date }})</span>
           {% endif %}
