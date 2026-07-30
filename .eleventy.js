@@ -89,6 +89,7 @@ module.exports = function(eleventyConfig) {
       layouts: "src/_includes/layouts",
       data: "src/_data"
     },
+    pathPrefix: "/Thinking/", // ★ 关键修复：配置 GitHub Pages 子目录路径
     templateFormats: ["md", "njk"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk"
