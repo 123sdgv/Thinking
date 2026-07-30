@@ -1,12 +1,8 @@
 ---
 layout: layouts/base.njk
 ---
-{% set allChapters = collections.chapters | storyChapters(story) %}
-{% set sortedChapters = allChapters | sortByOrder %}
-{% set currentIdx = 0 %}
-{% for ch in sortedChapters %}
-  {% if ch.url == page.url %}{% set currentIdx = loop.index0 %}{% endif %}
-{% endfor %}
+{% set sortedChapters = collections.chapters | storyChapters(story) %}
+{% set currentIdx = sortedChapters | findCurrentIndex(page) %}
 {% set prevChapter = sortedChapters[currentIdx - 1] if currentIdx > 0 else null %}
 {% set nextChapter = sortedChapters[currentIdx + 1] if currentIdx < (sortedChapters.length - 1) else null %}
 
