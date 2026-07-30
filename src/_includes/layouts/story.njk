@@ -1,0 +1,94 @@
+---
+layout: layouts/base.njk
+---
+<article class="story-page">
+  
+  <header class="story-header">
+    <div class="story-title-group">
+      <h1>{{ title }}</h1>
+      {% if title_en %}
+        <p class="title-en">{{ title_en }}</p>
+      {% endif %}
+      <div class="story-meta">
+        {% if status %}
+          <span class="status-badge status-{{ status | lower }}">{{ status }}</span>
+        {% endif %}
+        {% if timeline %}
+          <span class="meta-item">📅 {{ timeline }}</span>
+        {% endif %}
+        {% if genre and genre.length > 0 %}
+          <span class="meta-item">🏷️ {{ genre | join(" / ") }}</span>
+        {% endif %}
+      </div>
+    </div>
+    
+    {% if images and images.length > 0 %}
+    <div class="story-cover">
+      <div class="cover-placeholder">
+        <span class="cover-icon">📖</span>
+        <span class="cover-title">{{ title }}</span>
+      </div>
+      {% if images[0].caption %}
+        <p class="cover-caption">{{ images[0].caption }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+  </header>
+  
+  <!-- 简介 -->
+  <div class="story-body">
+    {{ content | safe }}
+  </div>
+  
+  <!-- 参与角色 -->
+  {% if characters and characters.length > 0 %}
+  <section class="story-section">
+    <h2>登场角色</h2>
+    <div class="story-characters">
+      {% for slug in characters %}
+        {% set char = collections.characters | findCharacter(slug) %}
+        <div class="story-character-card">
+          <div class="char-mini-portrait">
+            <span class="mini-icon">👤</span>
+          </div>
+          <div class="char-mini-info">
+            {% if char %}
+              <a href="{{ char.url }}">{{ char.data.name }}</a>
+            {% else %}
+              <span>{{ slug }}</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  
+  <!-- 章节目录 -->
+  {% if chapters and chapters.length > 0 %}
+  <section class="story-section">
+    <h2>章节目录</h2>
+    <nav class="chapter-toc">
+      {% for ch in chapters %}
+        <div class="toc-item">
+          <span class="toc-number">{{ ch.order }}</span>
+          <a href="/stories/{{ page.fileSlug }}/{{ ch.file }}/">{{ ch.title }}</a>
+        </div>
+      {% endfor %}
+    </nav>
+  </section>
+  {% endif %}
+  
+  <!-- 地点 -->
+  {% if locations and locations.length > 0 %}
+  <section class="story-section">
+    <h2>地点</h2>
+    <ul class="location-list">
+      {% for loc in locations %}
+        <li>{{ loc }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+  
+</article>

@@ -1,0 +1,74 @@
+---
+layout: layouts/base.njk
+---
+<article class="character-page character-alt">
+  
+  <!-- 封面式头部 -->
+  <header class="character-alt-header">
+    <div class="alt-banner">
+      <div class="alt-portrait">
+        <div class="portrait-placeholder large">
+          <span class="portrait-icon">👤</span>
+        </div>
+      </div>
+      <div class="alt-title-group">
+        <h1>{{ name }}</h1>
+        {% if name_en %}
+          <p class="name-en">{{ name_en }}</p>
+        {% endif %}
+        {% if aliases and aliases.length > 0 %}
+          <p class="aliases">{{ aliases | join(" · ") }}</p>
+        {% endif %}
+      </div>
+    </div>
+    
+    <div class="alt-quick-info">
+      {% if species %}<span><strong>种族</strong> {{ species }}</span>{% endif %}
+      {% if age %}<span><strong>年龄</strong> {{ age }}</span>{% endif %}
+      {% if occupation %}<span><strong>职业</strong> {{ occupation }}</span>{% endif %}
+      {% if height %}<span><strong>身高</strong> {{ height }}</span>{% endif %}
+    </div>
+  </header>
+  
+  <!-- 正文 -->
+  <div class="character-body">
+    {{ content | safe }}
+  </div>
+  
+  <!-- 关系 -->
+  {% if relationships and relationships.length > 0 %}
+  <section class="character-section">
+    <h2>关系</h2>
+    <div class="relationships-list">
+      {% for rel in relationships %}
+        {% set relChar = collections.characters | findCharacter(rel.character) %}
+        <div class="relationship-card">
+          <div class="rel-type">{{ rel.type }}</div>
+          <div class="rel-content">
+            {% if relChar %}
+              <a href="{{ relChar.url }}">{{ relChar.data.name }}</a>
+            {% else %}
+              <span>{{ rel.character }}</span>
+            {% endif %}
+            <p>{{ rel.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  
+  <!-- 参与的故事 -->
+  {% set charStories = collections.stories | relatedStories(page.fileSlug) %}
+  {% if charStories.length > 0 %}
+  <section class="character-section">
+    <h2>参与的故事</h2>
+    <ul>
+      {% for story in charStories %}
+        <li><a href="{{ story.url }}">{{ story.data.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+  
+</article>

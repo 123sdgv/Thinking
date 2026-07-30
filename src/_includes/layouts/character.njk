@@ -1,0 +1,164 @@
+---
+layout: layouts/base.njk
+---
+<article class="character-page">
+  
+  <!-- 头部信息 -->
+  <header class="character-header">
+    <div class="character-portrait">
+      {% if images and images.length > 0 %}
+        <div class="portrait-frame">
+          <div class="portrait-placeholder">
+            <span class="portrait-icon">👤</span>
+            <span class="portrait-label">{{ name }}</span>
+          </div>
+          {% if images[0].caption %}
+            <p class="portrait-caption">{{ images[0].caption }}</p>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="portrait-frame">
+          <div class="portrait-placeholder">
+            <span class="portrait-icon">👤</span>
+            <span class="portrait-label">{{ name }}</span>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="character-info">
+      <h1>{{ name }}</h1>
+      {% if name_en %}
+        <p class="name-en">{{ name_en }}</p>
+      {% endif %}
+      
+      {% if aliases and aliases.length > 0 %}
+        <p class="aliases">
+          <span class="info-label">别称：</span>
+          {% for alias in aliases %}
+            <span class="alias-tag">{{ alias }}</span>
+          {% endfor %}
+        </p>
+      {% endif %}
+      
+      <table class="info-table">
+        {% if species %}
+        <tr><td class="info-label">种族</td><td>{{ species }}</td></tr>
+        {% endif %}
+        {% if gender %}
+        <tr><td class="info-label">性别</td><td>{{ gender }}</td></tr>
+        {% endif %}
+        {% if age %}
+        <tr><td class="info-label">年龄</td><td>{{ age }}</td></tr>
+        {% endif %}
+        {% if birthday %}
+        <tr><td class="info-label">生日</td><td>{{ birthday }}</td></tr>
+        {% endif %}
+        {% if height %}
+        <tr><td class="info-label">身高</td><td>{{ height }}</td></tr>
+        {% endif %}
+        {% if occupation %}
+        <tr><td class="info-label">职业</td><td>{{ occupation }}</td></tr>
+        {% endif %}
+        {% if status %}
+        <tr><td class="info-label">状态</td><td><span class="status-badge status-{{ status }}">{{ status }}</span></td></tr>
+        {% endif %}
+      </table>
+      
+      {% if tags and tags.length > 0 %}
+        <div class="tags">
+          {% for tag in tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </header>
+  
+  <!-- 正文 -->
+  <div class="character-body">
+    {{ content | safe }}
+  </div>
+  
+  <!-- 关系 -->
+  {% if relationships and relationships.length > 0 %}
+  <section class="character-section">
+    <h2>关系</h2>
+    <div class="relationships-list">
+      {% for rel in relationships %}
+        {% set relChar = collections.characters | findCharacter(rel.character) %}
+        <div class="relationship-card">
+          <div class="rel-type">{{ rel.type }}</div>
+          <div class="rel-content">
+            {% if relChar %}
+              <a href="{{ relChar.url }}" class="rel-name">{{ relChar.data.name }}</a>
+            {% else %}
+              <span class="rel-name">{{ rel.character }}</span>
+            {% endif %}
+            <p class="rel-desc">{{ rel.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  
+  <!-- 参与的故事 -->
+  {% set charStories = collections.stories | relatedStories(page.fileSlug) %}
+  {% if charStories.length > 0 %}
+  <section class="character-section">
+    <h2>参与的故事</h2>
+    <div class="story-list">
+      {% for story in charStories %}
+        <div class="story-entry">
+          <h3><a href="{{ story.url }}">{{ story.data.title }}</a></h3>
+          {% if story.data.status %}
+            <span class="status-badge status-{{ story.data.status | lower }}">{{ story.data.status }}</span>
+          {% endif %}
+          {% if story.data.genre %}
+            <span class="genre-tags">{{ story.data.genre | join(" / ") }}</span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  
+  <!-- 参与的章节 -->
+  {% set charChapters = collections.chapters | relatedChapters(page.fileSlug) %}
+  {% if charChapters.length > 0 %}
+  <section class="character-section">
+    <h2>出现的章节</h2>
+    <ul class="chapter-list">
+      {% for chapter in charChapters %}
+        <li>
+          <a href="{{ chapter.url }}">{{ chapter.data.title }}</a>
+          {% if chapter.data.date %}
+            <span class="chapter-date">({{ chapter.data.date }})</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+  
+  <!-- 图片集 -->
+  {% if images and images.length > 0 %}
+  <section class="character-section">
+    <h2>图片集</h2>
+    <div class="image-gallery">
+      {% for img in images %}
+        <figure class="gallery-item">
+          <div class="gallery-placeholder">
+            <span class="gallery-icon">🖼️</span>
+          </div>
+          {% if img.caption %}
+            <figcaption>{{ img.caption }}</figcaption>
+          {% endif %}
+        </figure>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  
+</article>

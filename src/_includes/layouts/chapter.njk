@@ -1,0 +1,58 @@
+---
+layout: layouts/base.njk
+---
+{% set allChapters = collections.chapters | storyChapters(story) %}
+{% set currentIndex = allChapters | findCurrentIndex(page) %}
+
+<article class="chapter-page">
+  
+  <!-- 导航栏 -->
+  <nav class="chapter-top-nav">
+    {% set parentStory = collections.stories | findCharacter(story) %}
+    {% if parentStory %}
+      <a href="{{ parentStory.url }}" class="back-to-story">← 返回《{{ parentStory.data.title }}》</a>
+    {% else %}
+      <a href="/stories/" class="back-to-story">← 返回故事列表</a>
+    {% endif %}
+  </nav>
+  
+  <header class="chapter-header">
+    <h1>{{ title }}</h1>
+    <div class="chapter-meta">
+      {% if date %}
+        <span class="meta-item">📅 {{ date }}</span>
+      {% endif %}
+      {% if location %}
+        <span class="meta-item">📍 {{ location }}</span>
+      {% endif %}
+      {% if word_count %}
+        <span class="meta-item">📝 {{ word_count }} 字</span>
+      {% endif %}
+    </div>
+  </header>
+  
+  <!-- 正文内容 -->
+  <div class="chapter-content">
+    {{ content | safe }}
+  </div>
+  
+  <!-- 章节导航 -->
+  {% if allChapters.length > 0 %}
+  <nav class="chapter-bottom-nav">
+    {% for ch in allChapters %}
+      {% if ch.data.order == (currentIndex - 1) %}
+        <a href="{{ ch.url }}" class="nav-prev">← {{ ch.data.title }}</a>
+      {% endif %}
+    {% endfor %}
+    
+    <span class="nav-position">{{ currentIndex }} / {{ allChapters.length }}</span>
+    
+    {% for ch in allChapters %}
+      {% if ch.data.order == (currentIndex + 1) %}
+        <a href="{{ ch.url }}" class="nav-next">{{ ch.data.title }} →</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+  {% endif %}
+  
+</article>

@@ -1,0 +1,39 @@
+<div class="story-card">
+  <div class="story-card-cover">
+    <div class="card-cover-placeholder">
+      <span class="card-icon">📖</span>
+    </div>
+  </div>
+  <div class="story-card-body">
+    <h3 class="card-title">
+      <a href="{{ story.url }}">{{ story.data.title }}</a>
+    </h3>
+    {% if story.data.title_en %}
+      <p class="card-subtitle">{{ story.data.title_en }}</p>
+    {% endif %}
+    <div class="card-meta">
+      {% if story.data.status %}
+        <span class="status-badge status-{{ story.data.status | lower }}">{{ story.data.status }}</span>
+      {% endif %}
+      {% if story.data.timeline %}
+        <span>{{ story.data.timeline }}</span>
+      {% endif %}
+    </div>
+    {% if story.data.genre and story.data.genre.length > 0 %}
+      <div class="card-genres">
+        <span>{{ story.data.genre | join(" · ") }}</span>
+      </div>
+    {% endif %}
+    {% if story.data.characters and story.data.characters.length > 0 %}
+      <div class="card-characters">
+        <span class="card-label">角色：</span>
+        {% for slug in story.data.characters %}
+          {% set ch = collections.characters | findCharacter(slug) %}
+          {% if ch %}
+            <a href="{{ ch.url }}" class="card-char-link">{{ ch.data.name }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>

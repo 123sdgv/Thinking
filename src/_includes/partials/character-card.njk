@@ -1,0 +1,30 @@
+<div class="character-card">
+  <div class="card-portrait">
+    <div class="card-portrait-placeholder">
+      <span class="card-icon">👤</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="{{ character.url }}">{{ character.data.name }}</a>
+    </h3>
+    {% if character.data.name_en %}
+      <p class="card-subtitle">{{ character.data.name_en }}</p>
+    {% endif %}
+    <div class="card-meta">
+      {% if character.data.species %}
+        <span>{{ character.data.species }}</span>
+      {% endif %}
+      {% if character.data.occupation %}
+        <span>{{ character.data.occupation }}</span>
+      {% endif %}
+    </div>
+    {% if character.data.tags and character.data.tags.length > 0 %}
+      <div class="card-tags">
+        {% for tag in character.data.tags %}
+          <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>

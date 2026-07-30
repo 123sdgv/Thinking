@@ -1,0 +1,45 @@
+<div class="image-gallery-page">
+  {% set allImages = [] %}
+  
+  {% for character in collections.characters %}
+    {% if character.data.images and character.data.images.length > 0 %}
+      <div class="gallery-section">
+        <h3><a href="{{ character.url }}">{{ character.data.name }}</a> 的图片</h3>
+        <div class="gallery-grid">
+          {% for img in character.data.images %}
+            <figure class="gallery-item">
+              <div class="gallery-placeholder">
+                <span class="gallery-icon">🖼️</span>
+                <span class="gallery-label">{{ img.alt }}</span>
+              </div>
+              {% if img.caption %}
+                <figcaption>{{ img.caption }}</figcaption>
+              {% endif %}
+            </figure>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+  
+  {% for story in collections.stories %}
+    {% if story.data.images and story.data.images.length > 0 %}
+      <div class="gallery-section">
+        <h3><a href="{{ story.url }}">{{ story.data.title }}</a> 的图片</h3>
+        <div class="gallery-grid">
+          {% for img in story.data.images %}
+            <figure class="gallery-item">
+              <div class="gallery-placeholder">
+                <span class="gallery-icon">🖼️</span>
+                <span class="gallery-label">{{ img.alt }}</span>
+              </div>
+              {% if img.caption %}
+                <figcaption>{{ img.caption }}</figcaption>
+              {% endif %}
+            </figure>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,27 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">{{ site.title }}</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">
+      <span class="hamburger"></span>
+    </button>
+    <nav class="site-nav" id="siteNav">
+      <ul class="nav-list">
+        {% for item in site.nav %}
+          <li class="nav-item">
+            <a href="{{ item.url }}" class="nav-link{% if page.url == item.url %} active{% endif %}">{{ item.text }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.getElementById('navToggle')?.addEventListener('click', function() {
+    document.getElementById('siteNav')?.classList.toggle('open');
+    this.classList.toggle('open');
+  });
+</script>
