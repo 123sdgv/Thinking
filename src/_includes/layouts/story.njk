@@ -53,7 +53,7 @@ layout: layouts/base.njk
           </div>
           <div class="char-mini-info">
             {% if char %}
-              <a href="{{ char.url }}">{{ char.data.name }}</a>
+              <a href="{{ char.url | url }}">{{ char.data.name }}</a>
             {% else %}
               <span>{{ slug }}</span>
             {% endif %}
@@ -72,7 +72,7 @@ layout: layouts/base.njk
       {% for ch in chapters %}
         <div class="toc-item">
           <span class="toc-number">{{ ch.order }}</span>
-          <a href="/stories/{{ page.fileSlug }}/{{ ch.file }}/">{{ ch.title }}</a>
+          <a href="{{ ('/stories/' + page.fileSlug + '/' + ch.file + '/') | url }}">{{ ch.title }}</a>
         </div>
       {% endfor %}
     </nav>
