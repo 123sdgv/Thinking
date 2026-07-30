@@ -1,6 +1,6 @@
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="site-logo">
+    <a href="{{ '/' | url }}" class="site-logo">
       <span class="logo-icon">✦</span>
       <span class="logo-text">{{ site.title }}</span>
     </a>
@@ -11,7 +11,7 @@
       <ul class="nav-list">
         {% for item in site.nav %}
           <li class="nav-item">
-            <a href="{{ item.url }}" class="nav-link{% if page.url == item.url %} active{% endif %}">{{ item.text }}</a>
+            <a href="{{ item.url | url }}" class="nav-link{% if page.url == item.url %} active{% endif %}">{{ item.text }}</a>
           </li>
         {% endfor %}
       </ul>
