@@ -1,0 +1,26 @@
+/* 亮色主题 - 覆盖 theme-base.css 中的变量 */
+/* 如需切换，在 site.json 中将 theme 改为 "light" */
+
+.theme-light {
+  --color-bg: #f8f8fa;
+  --color-bg-alt: #eeeef2;
+  --color-bg-card: #ffffff;
+  --color-bg-hover: #e8e8f0;
+  --color-text: #1a1a2e;
+  --color-text-muted: #666680;
+  --color-text-dim: #9999aa;
+  --color-accent: #6c5ce7;
+  --color-accent-light: #7c6df0;
+  --color-accent-bg: rgba(108, 92, 231, 0.08);
+  --color-border: #d0d0da;
+  --color-border-light: #e0e0ea;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.theme-light .character-card:hover,
+.theme-light .story-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+}

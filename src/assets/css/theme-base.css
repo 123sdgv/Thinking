@@ -1,0 +1,877 @@
+/* ============================================
+   OC 宇宙作品站 - 基础主题
+   
+   所有视觉变量集中在此文件顶部。
+   更换主题时只需修改 CSS 变量值。
+   ============================================ */
+
+/* ----- CSS 变量（默认暗色主题） ----- */
+:root,
+.theme-dark {
+  --color-bg: #0a0a0f;
+  --color-bg-alt: #12121a;
+  --color-bg-card: #1a1a26;
+  --color-bg-hover: #22223a;
+  --color-text: #e0e0e8;
+  --color-text-muted: #8888a0;
+  --color-text-dim: #666680;
+  --color-accent: #7c6df0;
+  --color-accent-light: #9b8ff5;
+  --color-accent-bg: rgba(124, 109, 240, 0.1);
+  --color-border: #2a2a3a;
+  --color-border-light: #3a3a4a;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-info: #60a5fa;
+  
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+  --font-mono: "SF Mono", "Fira Code", "JetBrains Mono", monospace;
+  --font-serif: "Noto Serif SC", Georgia, serif;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+  
+  --max-width: 960px;
+  --header-height: 60px;
+  --spacing: 16px;
+}
+
+/* ----- 亮色主题 ----- */
+.theme-light {
+  --color-bg: #f8f8fa;
+  --color-bg-alt: #eeeef2;
+  --color-bg-card: #ffffff;
+  --color-bg-hover: #e8e8f0;
+  --color-text: #1a1a2e;
+  --color-text-muted: #666680;
+  --color-text-dim: #9999aa;
+  --color-accent: #6c5ce7;
+  --color-accent-light: #7c6df0;
+  --color-accent-bg: rgba(108, 92, 231, 0.08);
+  --color-border: #d0d0da;
+  --color-border-light: #e0e0ea;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+/* ----- Reset ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--color-accent-light);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ----- 排版 ----- */
+h1, h2, h3, h4 {
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+  color: var(--color-text);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; margin-top: 1.5em; }
+h3 { font-size: 1.2rem; margin-top: 1em; }
+
+p { margin-bottom: 1em; }
+
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1em;
+  margin: 1em 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-bg-alt);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+pre {
+  background: var(--color-bg-alt);
+  padding: 1em;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2em 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+th, td {
+  padding: 0.5em 0.8em;
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+th {
+  background: var(--color-bg-alt);
+  font-weight: 600;
+}
+
+/* ----- 主容器 ----- */
+.main-content {
+  flex: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: calc(var(--header-height) + var(--spacing)) var(--spacing) var(--spacing);
+}
+
+/* ----- 首页网格 ----- */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing);
+  margin: 1.5em 0;
+}
+
+.home-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.home-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-card h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.home-card a {
+  display: inline-block;
+  margin-top: 0.5em;
+}
+
+/* ----- 状态标签 ----- */
+.status-badge {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.status-连载中, .status-ongoing {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--color-success);
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.status-构思中, .status-draft {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--color-warning);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.status-活跃, .status-active {
+  background: rgba(96, 165, 250, 0.15);
+  color: var(--color-info);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+/* ----- 标签 ----- */
+.tag {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  border: 1px solid rgba(124, 109, 240, 0.2);
+  margin: 0.2em;
+}
+
+.tags {
+  margin-top: 0.5em;
+}
+
+/* ----- 角色卡片（列表页） ----- */
+.character-card {
+  display: flex;
+  gap: 1em;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1em;
+  margin-bottom: 1em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.character-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-portrait-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border: 1px solid var(--color-border);
+}
+
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-title {
+  margin: 0 0 0.2em;
+  font-size: 1.1rem;
+}
+
+.card-subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.3em;
+}
+
+.card-meta {
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  margin-bottom: 0.3em;
+}
+
+.card-tags {
+  margin-top: 0.3em;
+}
+
+/* ----- 故事卡片（列表页） ----- */
+.story-card {
+  display: flex;
+  gap: 1em;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1em;
+  margin-bottom: 1em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.story-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-cover-placeholder {
+  width: 80px;
+  height: 100px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.story-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-genres {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 0.3em;
+}
+
+.card-characters {
+  font-size: 0.85rem;
+  margin-top: 0.5em;
+}
+
+.card-label {
+  color: var(--color-text-dim);
+  margin-right: 0.3em;
+}
+
+.card-char-link {
+  margin-right: 0.5em;
+}
+
+/* ----- 角色详情页 ----- */
+.character-header {
+  display: flex;
+  gap: 2em;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.portrait-frame {
+  text-align: center;
+}
+
+.portrait-placeholder {
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg-card));
+  border: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.portrait-icon {
+  font-size: 3rem;
+}
+
+.portrait-label {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
+.portrait-caption {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  margin-top: 0.5em;
+}
+
+.character-info {
+  flex: 1;
+}
+
+.character-info h1 {
+  margin-bottom: 0.2em;
+}
+
+.name-en {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 0.5em;
+}
+
+.aliases {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.8em;
+}
+
+.alias-tag {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  background: var(--color-accent-bg);
+  border-radius: var(--radius-sm);
+  margin: 0.1em;
+  font-size: 0.85rem;
+}
+
+.info-table {
+  width: auto;
+  border: none;
+  margin-bottom: 0.5em;
+}
+
+.info-table td {
+  border: none;
+  padding: 0.3em 0.5em;
+}
+
+.info-table td:first-child {
+  color: var(--color-text-dim);
+  width: 4em;
+  padding-left: 0;
+}
+
+.info-label {
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+}
+
+.character-body {
+  line-height: 1.8;
+  margin-bottom: 2em;
+}
+
+.character-section {
+  margin-top: 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--color-border);
+}
+
+.character-section h2 {
+  margin-top: 0;
+}
+
+/* 关系列表 */
+.relationships-list {
+  display: grid;
+  gap: 0.8em;
+}
+
+.relationship-card {
+  display: flex;
+  gap: 1em;
+  padding: 0.8em;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.rel-type {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: var(--color-accent-bg);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  height: fit-content;
+}
+
+.rel-name {
+  font-weight: 600;
+}
+
+.rel-desc {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-top: 0.2em;
+}
+
+/* 故事条目 */
+.story-entry {
+  padding: 0.8em;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  margin-bottom: 0.5em;
+}
+
+.story-entry h3 {
+  margin: 0 0 0.3em;
+}
+
+/* ----- 故事详情页 ----- */
+.story-header {
+  display: flex;
+  gap: 2em;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.story-title-group {
+  flex: 1;
+}
+
+.story-title-group h1 {
+  margin-bottom: 0.2em;
+}
+
+.title-en {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 0.5em;
+}
+
+.story-meta {
+  display: flex;
+  gap: 0.8em;
+  flex-wrap: wrap;
+  margin-top: 0.5em;
+}
+
+.meta-item {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.cover-placeholder {
+  width: 180px;
+  height: 240px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg-card));
+  border: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.cover-icon {
+  font-size: 3rem;
+}
+
+.cover-title {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  text-align: center;
+  padding: 0 0.5em;
+}
+
+.cover-caption {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.story-body {
+  line-height: 1.8;
+  margin-bottom: 2em;
+}
+
+.story-section {
+  margin-top: 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--color-border);
+}
+
+.story-section h2 {
+  margin-top: 0;
+}
+
+/* 登场角色 */
+.story-characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.story-character-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0.8em;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.char-mini-portrait {
+  font-size: 1.5rem;
+}
+
+/* 章节目录 */
+.chapter-toc {
+  display: grid;
+  gap: 0.5em;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.7em 1em;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  transition: background 0.2s;
+}
+
+.toc-item:hover {
+  background: var(--color-bg-hover);
+}
+
+.toc-number {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ----- 章节阅读页 ----- */
+.chapter-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.chapter-top-nav {
+  margin-bottom: 1.5em;
+}
+
+.back-to-story {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.chapter-header {
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.chapter-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3em;
+}
+
+.chapter-meta {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+}
+
+.chapter-content {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 2;
+  margin-bottom: 3em;
+}
+
+.chapter-content p {
+  text-indent: 2em;
+  margin-bottom: 0.5em;
+}
+
+.chapter-bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--color-border);
+  gap: 1em;
+}
+
+.nav-prev, .nav-next {
+  font-size: 0.9rem;
+  max-width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-position {
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+  flex-shrink: 0;
+}
+
+.nav-placeholder {
+  width: 40%;
+}
+
+/* ----- 图片画廊 ----- */
+.image-gallery-page {
+  display: grid;
+  gap: 2em;
+}
+
+.gallery-section h3 {
+  margin-bottom: 0.8em;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1em;
+}
+
+.gallery-item {
+  break-inside: avoid;
+}
+
+.gallery-placeholder {
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg-card));
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  transition: transform 0.2s;
+}
+
+.gallery-placeholder:hover {
+  transform: scale(1.02);
+}
+
+.gallery-icon {
+  font-size: 2.5rem;
+}
+
+.gallery-label {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  text-align: center;
+  padding: 0 0.5em;
+}
+
+.gallery-item figcaption {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  margin-top: 0.3em;
+  text-align: center;
+}
+
+/* ----- 角色详情页图片集 ----- */
+.character-page .image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1em;
+}
+
+/* ----- 响应式 ----- */
+@media (max-width: 768px) {
+  html { font-size: 15px; }
+  
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .character-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .portrait-placeholder {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .info-table {
+    margin: 0 auto;
+  }
+  
+  .story-header {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .cover-placeholder {
+    width: 140px;
+    height: 190px;
+  }
+  
+  .character-card, .story-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .card-portrait-placeholder {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .card-cover-placeholder {
+    width: 70px;
+    height: 90px;
+  }
+  
+  .chapter-bottom-nav {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .nav-prev, .nav-next, .nav-placeholder {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .story-characters {
+    justify-content: center;
+  }
+}
+
+/* ----- 动画 ----- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+  animation: fadeIn 0.3s ease-out;
+}

@@ -1,0 +1,12 @@
+/* 暗色主题 - 使用 theme-base.css 中的 :root 变量 */
+/* 此文件仅用于标识，变量已在 theme-base.css 中定义 */
+
+.theme-dark {
+  /* 所有变量在 theme-base.css 的 :root 中已定义 */
+}
+
+/* 暗色专属微调 */
+.theme-dark .character-card:hover,
+.theme-dark .story-card:hover {
+  border-color: var(--color-accent);
+}
