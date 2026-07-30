@@ -48,12 +48,12 @@ module.exports = function(eleventyConfig) {
     }).sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
   });
 
-  // 查找当前章节在排序后列表中的 order 值
+  // 查找当前章节在排序后数组中的索引（0-based）
   eleventyConfig.addFilter("findCurrentIndex", function(chapters, page) {
     if (!chapters || !page) return 0;
     const sorted = [...chapters].sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
     const index = sorted.findIndex(ch => ch.url === page.url);
-    return index >= 0 ? sorted[index].data.order : 0;
+    return index >= 0 ? index : 0;
   });
 
   // 通过 fileSlug 查找集合中的项（角色、故事通用）
@@ -66,12 +66,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("findCharacter", function(characters, slug) {
     if (!characters || !slug) return null;
     return characters.find(ch => ch.data.page.fileSlug === slug);
-  });
-
-  // 格式化日期
-  eleventyConfig.addFilter("readableDate", function(dateStr) {
-    if (!dateStr) return "";
-    return dateStr;
   });
 
   // 排序
