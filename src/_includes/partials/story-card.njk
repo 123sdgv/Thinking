@@ -6,7 +6,7 @@
   </div>
   <div class="story-card-body">
     <h3 class="card-title">
-      <a href="{{ story.url }}">{{ story.data.title }}</a>
+      <a href="{{ story.url | url }}">{{ story.data.title }}</a>
     </h3>
     {% if story.data.title_en %}
       <p class="card-subtitle">{{ story.data.title_en }}</p>
@@ -30,7 +30,7 @@
         {% for slug in story.data.characters %}
           {% set ch = collections.characters | findCharacter(slug) %}
           {% if ch %}
-            <a href="{{ ch.url }}" class="card-char-link">{{ ch.data.name }}</a>
+            <a href="{{ ch.url | url }}" class="card-char-link">{{ ch.data.name }}</a>
           {% endif %}
         {% endfor %}
       </div>
