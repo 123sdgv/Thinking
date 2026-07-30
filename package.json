@@ -1,0 +1,16 @@
+{
+  "name": "oc-universe",
+  "version": "1.0.0",
+  "description": "OC Universe - Original Character static website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "watch": "eleventy --watch"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "markdown-it": "^14.1.0",
+    "liquidjs": "^10.14.0"
+  }
+}
