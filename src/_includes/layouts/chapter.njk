@@ -12,9 +12,9 @@ layout: layouts/base.njk
   <nav class="chapter-top-nav">
     {% set parentStory = collections.stories | findBySlug(story) %}
     {% if parentStory %}
-      <a href="{{ parentStory.url }}" class="back-to-story">← 返回《{{ parentStory.data.title }}》</a>
+      <a href="{{ parentStory.url | url }}" class="back-to-story">← 返回《{{ parentStory.data.title }}》</a>
     {% else %}
-      <a href="/stories/" class="back-to-story">← 返回故事列表</a>
+      <a href="{{ '/stories/' | url }}" class="back-to-story">← 返回故事列表</a>
     {% endif %}
   </nav>
   
@@ -42,7 +42,7 @@ layout: layouts/base.njk
   {% if sortedChapters.length > 1 %}
   <nav class="chapter-bottom-nav">
     {% if prevChapter %}
-      <a href="{{ prevChapter.url }}" class="nav-prev">← {{ prevChapter.data.title }}</a>
+      <a href="{{ prevChapter.url | url }}" class="nav-prev">← {{ prevChapter.data.title }}</a>
     {% else %}
       <span class="nav-placeholder"></span>
     {% endif %}
@@ -50,7 +50,7 @@ layout: layouts/base.njk
     <span class="nav-position">{{ currentIdx + 1 }} / {{ sortedChapters.length }}</span>
     
     {% if nextChapter %}
-      <a href="{{ nextChapter.url }}" class="nav-next">{{ nextChapter.data.title }} →</a>
+      <a href="{{ nextChapter.url | url }}" class="nav-next">{{ nextChapter.data.title }} →</a>
     {% else %}
       <span class="nav-placeholder"></span>
     {% endif %}
