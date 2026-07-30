@@ -2,13 +2,19 @@
 layout: layouts/base.njk
 ---
 {% set allChapters = collections.chapters | storyChapters(story) %}
-{% set currentIndex = allChapters | findCurrentIndex(page) %}
+{% set sortedChapters = allChapters | sortByOrder %}
+{% set currentIdx = 0 %}
+{% for ch in sortedChapters %}
+  {% if ch.url == page.url %}{% set currentIdx = loop.index0 %}{% endif %}
+{% endfor %}
+{% set prevChapter = sortedChapters[currentIdx - 1] if currentIdx > 0 else null %}
+{% set nextChapter = sortedChapters[currentIdx + 1] if currentIdx < (sortedChapters.length - 1) else null %}
 
 <article class="chapter-page">
   
-  <!-- 导航栏 -->
+  <!-- 顶部导航栏 -->
   <nav class="chapter-top-nav">
-    {% set parentStory = collections.stories | findCharacter(story) %}
+    {% set parentStory = collections.stories | findBySlug(story) %}
     {% if parentStory %}
       <a href="{{ parentStory.url }}" class="back-to-story">← 返回《{{ parentStory.data.title }}》</a>
     {% else %}
@@ -36,22 +42,22 @@ layout: layouts/base.njk
     {{ content | safe }}
   </div>
   
-  <!-- 章节导航 -->
-  {% if allChapters.length > 0 %}
+  <!-- 底部章节导航 -->
+  {% if sortedChapters.length > 1 %}
   <nav class="chapter-bottom-nav">
-    {% for ch in allChapters %}
-      {% if ch.data.order == (currentIndex - 1) %}
-        <a href="{{ ch.url }}" class="nav-prev">← {{ ch.data.title }}</a>
-      {% endif %}
-    {% endfor %}
+    {% if prevChapter %}
+      <a href="{{ prevChapter.url }}" class="nav-prev">← {{ prevChapter.data.title }}</a>
+    {% else %}
+      <span class="nav-placeholder"></span>
+    {% endif %}
     
-    <span class="nav-position">{{ currentIndex }} / {{ allChapters.length }}</span>
+    <span class="nav-position">{{ currentIdx + 1 }} / {{ sortedChapters.length }}</span>
     
-    {% for ch in allChapters %}
-      {% if ch.data.order == (currentIndex + 1) %}
-        <a href="{{ ch.url }}" class="nav-next">{{ ch.data.title }} →</a>
-      {% endif %}
-    {% endfor %}
+    {% if nextChapter %}
+      <a href="{{ nextChapter.url }}" class="nav-next">{{ nextChapter.data.title }} →</a>
+    {% else %}
+      <span class="nav-placeholder"></span>
+    {% endif %}
   </nav>
   {% endif %}
   
