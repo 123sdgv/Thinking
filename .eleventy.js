@@ -1,5 +1,3 @@
-const { DateTime } = require("luxon");
-
 module.exports = function(eleventyConfig) {
   // ===== 静态资源复制 =====
   eleventyConfig.addPassthroughCopy("src/assets");
@@ -42,7 +40,7 @@ module.exports = function(eleventyConfig) {
     }).sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
   });
 
-  // 获取故事的所有章节
+  // 获取故事的所有章节（按 order 排序）
   eleventyConfig.addFilter("storyChapters", function(chapters, storySlug) {
     if (!chapters || !storySlug) return [];
     return chapters.filter(ch => {
@@ -50,7 +48,21 @@ module.exports = function(eleventyConfig) {
     }).sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
   });
 
-  // 获取角色对象
+  // 查找当前章节在排序后列表中的 order 值
+  eleventyConfig.addFilter("findCurrentIndex", function(chapters, page) {
+    if (!chapters || !page) return 0;
+    const sorted = [...chapters].sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+    const index = sorted.findIndex(ch => ch.url === page.url);
+    return index >= 0 ? sorted[index].data.order : 0;
+  });
+
+  // 通过 fileSlug 查找集合中的项（角色、故事通用）
+  eleventyConfig.addFilter("findBySlug", function(collection, slug) {
+    if (!collection || !slug) return null;
+    return collection.find(item => item.data.page.fileSlug === slug);
+  });
+
+  // 通过 fileSlug 查找角色（兼容旧模板）
   eleventyConfig.addFilter("findCharacter", function(characters, slug) {
     if (!characters || !slug) return null;
     return characters.find(ch => ch.data.page.fileSlug === slug);
@@ -66,6 +78,12 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("sortByOrder", function(arr) {
     if (!arr) return [];
     return [...arr].sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+  });
+
+  // 按字段筛选
+  eleventyConfig.addFilter("filterBy", function(arr, key, value) {
+    if (!arr) return [];
+    return arr.filter(item => item.data[key] === value);
   });
 
   // ===== 返回配置 =====
