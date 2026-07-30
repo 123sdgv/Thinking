@@ -1,0 +1,16 @@
+{
+  "title": "星尘宇宙",
+  "subtitle": "OC 原创角色作品站",
+  "description": "一个由多个原创角色和交织故事构成的虚构世界",
+  "url": "",
+  "author": "OC Universe",
+  "language": "zh-CN",
+  "theme": "dark",
+  "nav": [
+    { "text": "首页", "url": "/" },
+    { "text": "角色", "url": "/characters/" },
+    { "text": "故事", "url": "/stories/" },
+    { "text": "世界观", "url": "/world/" },
+    { "text": "画廊", "url": "/images/" }
+  ]
+}

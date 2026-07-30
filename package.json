@@ -1,0 +1,13 @@
+{
+  "name": "oc-universe",
+  "version": "1.0.0",
+  "description": "OC宇宙作品站 - 以多个原创角色为核心的静态网站",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "serve": "npx @11ty/eleventy --serve",
+    "dev": "npx @11ty/eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
