@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -23,13 +24,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
       
       - name: Install dependencies
         run: npm install
+        env:
+          # 解决 Ubuntu 24.04 下 npm digest 兼容问题
+          NODE_OPTIONS: "--openssl-legacy-provider"
       
       - name: Build site
         run: npm run build
+      
+      - name: List build output
+        run: ls -la _site/ && echo "---index---" && ls -la _site/index.html || echo "NO index.html in _site"
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
