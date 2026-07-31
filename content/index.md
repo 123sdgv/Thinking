@@ -1,7 +1,7 @@
 ---
 layout: layouts/page.njk
 title: "欢迎来到星尘宇宙"
-permalink: "/"
+permalink: "/index.html"
 ---
 
 # ✦ 星尘宇宙
