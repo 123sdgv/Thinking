@@ -28,9 +28,6 @@ jobs:
       
       - name: Install dependencies
         run: npm install
-        env:
-          # 解决 Ubuntu 24.04 下 npm digest 兼容问题
-          NODE_OPTIONS: "--openssl-legacy-provider"
       
       - name: Build site
         run: npm run build
